@@ -1,5 +1,5 @@
 const cachePrefix = 'gp-player-'
-const cacheVersion = 'v1'
+const cacheVersion = 'v2'
 const cacheName = `${cachePrefix}${cacheVersion}`
 
 const HOSTNAME = 'gpmod.github.io'
