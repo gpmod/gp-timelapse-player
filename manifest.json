@@ -14,7 +14,7 @@
       "sizes": "192x192"
     }
   ],
-  "start_url": "/test/gp-mod/gpmod/gp-timelapse-player/",
+  "start_url": "/gp-timelapse-player/",
   "background_color": "#476ecf",
   "display": "standalone",
   "description": "GP Timelapse Player",
@@ -32,7 +32,7 @@
   ],
   "file_handlers": [
     {
-      "action": "/test/gp-mod/gpmod/gp-timelapse-player/",
+      "action": "/gp-timelapse-player/",
       "accept": {
         "image/gp-img": ".gpimg"
       },
