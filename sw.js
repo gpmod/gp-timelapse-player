@@ -1,5 +1,5 @@
 const cachePrefix = 'gp-player-'
-const cacheVersion = 'v11'
+const cacheVersion = 'v12'
 const cacheName = `${cachePrefix}${cacheVersion}`
 
 const PATHNAME = '/gp-timelapse-player'
