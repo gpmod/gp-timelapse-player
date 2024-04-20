@@ -1,5 +1,5 @@
 const cachePrefix = 'gp-player-'
-const cacheVersion = 'v15'
+const cacheVersion = 'v16'
 const cacheName = `${cachePrefix}${cacheVersion}`
 
 const PATHNAME = '/gp-timelapse-player'
@@ -11,6 +11,8 @@ const content = [
   `${PATHNAME}/index.html`,
   `${PATHNAME}/styles/fonts.css`,
   `${PATHNAME}/styles/no-mod.css`,
+  `${PATHNAME}/images/favicon/favicon-16x16.png`,
+  `${PATHNAME}/images/favicon/favicon-32x32.png`,
   `${PATHNAME}/images/icons/app-192.png`,
   `${PATHNAME}/images/icons/app-512.png`,
   `${PATHNAME}/images/icons/gpimg-256.png`,
