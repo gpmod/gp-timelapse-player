@@ -1,5 +1,5 @@
 const cachePrefix = 'gp-player-'
-const cacheVersion = 'v14'
+const cacheVersion = 'v15'
 const cacheName = `${cachePrefix}${cacheVersion}`
 
 const PATHNAME = '/gp-timelapse-player'
@@ -31,6 +31,10 @@ function isRemoteSourceURL(url) {
   return url.search.startsWith('?url=')
 }
 
+function isDiscordCDN(url) {
+  return url.hostname === 'cdn.discordapp.com'
+}
+
 self.addEventListener('install', (e) => {
   self.skipWaiting((async () => {
     const cache = await caches.open(cacheName)
@@ -57,6 +61,7 @@ self.addEventListener('fetch', (e) => {
 
       if (
         !isRemoteSourceURL(reqURL) &&
+        !isDiscordCDN(reqURL) &&
         reqURL.hostname !== 'localhost'
       ) {
         console.log(`[Service Worker] Caching new resource: ${e.request.url}`)
