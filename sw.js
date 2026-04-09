@@ -1,5 +1,5 @@
 const cachePrefix = 'gp-player-'
-const cacheVersion = 'v22'
+const cacheVersion = 'v23'
 const cacheName = `${cachePrefix}${cacheVersion}`
 
 const PATHNAME = '/gp-timelapse-player'
@@ -42,13 +42,16 @@ function isExtensionProtocol(url) {
 }
 
 self.addEventListener('install', (e) => {
-  self.skipWaiting((async () => {
+  self.skipWaiting()
+
+  e.waitUntil((async () => {
     const cache = await caches.open(cacheName)
     await cache.addAll(content)
 
     noCorsContent.forEach(async (url) => {
       const res = await fetch(url, {
-        mode: 'no-cors', credentials: 'omit'
+        mode: 'no-cors',
+        credentials: 'omit'
       })
       cache.put(url, res)
     })
@@ -83,14 +86,16 @@ self.addEventListener('fetch', (e) => {
   })())
 })
 
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys().then((keyList) => {
-      return Promise.all(keyList.map((key) => {
-        if (cacheName.startsWith(cachePrefix) && cacheName !== key) {
-          return caches.delete(key)
-        }
-      }))
-    })
-  )
+self.addEventListener('activate', (e) => {
+  e.waitUntil((async () => {
+    const keyList = await caches.keys()
+
+    await Promise.all(keyList.map((key) => {
+      if (key.startsWith(cachePrefix) && key !== cacheName) {
+        return caches.delete(key)
+      }
+    }))
+
+    await clients.claim()
+  })())
 })
