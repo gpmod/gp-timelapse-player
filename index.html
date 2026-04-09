@@ -48,20 +48,22 @@
   </script>
 
   <script>
-    navigator.serviceWorker.register('/gp-timelapse-player/sw.js')
-      .then(function (registration) {
-        console.log('Service worker registered successfully')
-      })
-      .catch(function (e) {
-        console.error('Error during service worker registration:', e)
-      })
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/gp-timelapse-player/sw.js')
+        .then(function (registration) {
+          console.log('Service worker registered successfully')
+        })
+        .catch(function (e) {
+          console.error('Error during service worker registration:', e)
+        })
 
-    let refreshing = false
-    navigator.serviceWorker.addEventListener('controllerchange', () => {
-      if (!refreshing && document.visibilityState === 'visible') {
-        refreshing = true
-        window.location.reload()
-      }
+      let refreshing = false
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (!refreshing && document.visibilityState === 'visible') {
+          refreshing = true
+          window.location.reload()
+        }
+      })
     })
 
     navigator.registerProtocolHandler('web+gpimg', './?url=%s')
